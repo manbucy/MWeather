@@ -20,3 +20,5 @@ KEY=c28a015598a647b597e9fb0311379bf8
 天气预报集合(包含上面所有的信息)：
 	https://free-api.heweather.com/v5/weather?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
 
+关于天气代码的解析 如北京的 CN101010100
+
