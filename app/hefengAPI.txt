@@ -1,0 +1,22 @@
+KEY=c28a015598a647b597e9fb0311379bf8
+
+7-10 天天气预报：
+	https://free-api.heweather.com/v5/forecast?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8 
+	免费用户为未来两天（加今天三天）
+	
+实况天气：
+	https://free-api.heweather.com/v5/now?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
+	
+每小时预报：
+	https://free-api.heweather.com/v5/hourly?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
+
+生活指数：
+	https://free-api.heweather.com/v5/suggestion?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
+
+灾害预警：
+	https://free-api.heweather.com/v5/alarm?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
+
+
+天气预报集合(包含上面所有的信息)：
+	https://free-api.heweather.com/v5/weather?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
+
