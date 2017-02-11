@@ -1,6 +1,7 @@
 package com.manbu.mweather;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,7 @@ public class ChooseAreaFragment extends Fragment {
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTY = 2;
-    private TextView tilteText;
+    private TextView titleText;
     private Button backButton;
     private ListView listView;
     private List<String> dataList = new ArrayList<>();
@@ -55,7 +56,7 @@ public class ChooseAreaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chooes_area, container, false);
-        tilteText = (TextView) view.findViewById(R.id.title_text);
+        titleText = (TextView) view.findViewById(R.id.title_text);
         backButton = (Button) view.findViewById(R.id.back_button);
         listView = (ListView) view.findViewById(R.id.list_view);
         adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, dataList);
@@ -75,6 +76,12 @@ public class ChooseAreaFragment extends Fragment {
                 } else if (currentLevel == LEVEL_CITY) {
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
@@ -95,7 +102,7 @@ public class ChooseAreaFragment extends Fragment {
      * 查询全国所有的省，如果本地数据库里面没有就从服务器上面获取
      */
     private void queryProvinces() {
-        tilteText.setText("中国");
+        titleText.setText("中国");
         backButton.setVisibility(View.INVISIBLE);
         provinceList = DataSupport.findAll(Province.class);
         if (provinceList.size() > 0) {
@@ -113,7 +120,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCities() {
-        tilteText.setText(selectedProvince.getProvinceName());
+        titleText.setText(selectedProvince.getProvinceName());
         backButton.setVisibility(View.VISIBLE);
         cityList = DataSupport.where("provinceid=?",
                 String.valueOf(selectedProvince.getId())).find(City.class);
@@ -133,7 +140,7 @@ public class ChooseAreaFragment extends Fragment {
     }
 
     private void queryCounties() {
-        tilteText.setText(selectedCity.getCityName());
+        titleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
         countyList = DataSupport.where("cityid=?",
                 String.valueOf(selectedCity.getId())).find(County.class);
@@ -169,14 +176,14 @@ public class ChooseAreaFragment extends Fragment {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String resposeText = response.body().string();
+                String responseText = response.body().string();
                 boolean result = false;
                 if ("province".equals(type)) {
-                    result = Utility.handleProvinceResponse(resposeText);
+                    result = Utility.handleProvinceResponse(responseText);
                 } else if ("city".equals(type)) {
-                    result = Utility.handleCityResponse(resposeText, selectedProvince.getId());
+                    result = Utility.handleCityResponse(responseText, selectedProvince.getId());
                 } else if ("county".equals(type)) {
-                    result = Utility.handleCountyResponse(resposeText, selectedCity.getId());
+                    result = Utility.handleCountyResponse(responseText, selectedCity.getId());
                 }
                 if (result) {
                     getActivity().runOnUiThread(new Runnable() {

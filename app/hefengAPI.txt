@@ -20,7 +20,15 @@ KEY=c28a015598a647b597e9fb0311379bf8
 天气预报集合(包含上面所有的信息)：
 	https://free-api.heweather.com/v5/weather?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
 
-关于天气代码的解析 如北京的 CN101010100
+获取全国所有省份：
+    http://guolin.tech/api/china
+    获取某一省份的所有市
+        http://guolin.tech/api/china/provinceId
+        获取某一市的所有县
+            http://guolin.tech/api/china/provinceId/CityId
+
+必应每日一图:
+    http://guolin.tech/api/bing_pic
 
 
 
