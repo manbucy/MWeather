@@ -20,6 +20,8 @@ KEY=c28a015598a647b597e9fb0311379bf8
 天气预报集合(包含上面所有的信息)：
 	https://free-api.heweather.com/v5/weather?city=CN101270803&key=c28a015598a647b597e9fb0311379bf8
 
+http://guolin.tech/api/weather?cityid=CN101270803&key=bc0418b57b2d4918819d3974ac1285d9
+
 获取全国所有省份：
     http://guolin.tech/api/china
     获取某一省份的所有市

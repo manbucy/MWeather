@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
 import com.manbu.mweather.gson.HeWeather;
+import com.manbu.mweather.util.Constants;
 import com.manbu.mweather.util.HttpUtil;
 import com.manbu.mweather.util.Utility;
 
@@ -45,10 +46,10 @@ public class AutoUpdateService extends Service {
         if (weatherString != null) {
             HeWeather heWeather = Utility.handleHeWeatherResponse(weatherString);
             String weatherId = heWeather.basic.id;
-//            String weatherUrl = "https://free-api.heweather.com/v5/weather?" +
-//                    "city=" + weatherId + "&key=c28a015598a647b597e9fb0311379bf8";
-            String weatherUrl = "http://guolin.tech/api/weather?" +
-                    "cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
+            String weatherUrl = "https://free-api.heweather.com/v5/weather?" +
+                    "city=" + weatherId + "&key="+Constants.getApiKey();
+//            String weatherUrl = "http://guolin.tech/api/weather?" +
+//                    "cityid=" + weatherId + "&key="+ Constants.getApiKey();
             HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
