@@ -3,9 +3,11 @@ package com.manbu.mweather.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.manbu.mweather.db.City;
 import com.manbu.mweather.db.County;
 import com.manbu.mweather.db.Province;
+import com.manbu.mweather.gson.HeWeather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,5 +75,17 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static HeWeather handleHeWeatherResponse(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather5");
+            String heWeatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(heWeatherContent,HeWeather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

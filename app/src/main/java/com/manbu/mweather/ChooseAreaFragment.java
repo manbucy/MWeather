@@ -197,7 +197,6 @@ public class ChooseAreaFragment extends Fragment {
         });
     }
 
-
     private void showProgressDialog() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(getActivity());
@@ -212,5 +211,4 @@ public class ChooseAreaFragment extends Fragment {
             progressDialog.dismiss();
         }
     }
-
 }
